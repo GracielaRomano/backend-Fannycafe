@@ -1,10 +1,9 @@
 RewriteEngine On
 
 # Redirigir todas las peticiones a index.php si el archivo no existe
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^api/events/?$ api/events/index.php [L]
-RewriteRule ^api/events/([0-9]+)/?$ api/events/show.php?id=$1 [L]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.* - [L]
 
 # Headers CORS
 Header always set Access-Control-Allow-Origin "*"
@@ -12,5 +11,6 @@ Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
 Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
 
 # Manejar preflight requests
-RewriteCond %{REQUEST_METHOD} OPTIONS
-RewriteRule ^(.*)$ $1 [R=200,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.* index.php [L]
