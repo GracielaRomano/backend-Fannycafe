@@ -30,6 +30,7 @@ if($num > 0) {
             "subtitle" => $subtitle,
             "description" => $description,
             "event_date" => $event_date,
+            "event_yyyymm" => $event_yyyymm,
             "location" => $location,
             "attendees" => $attendees,
             "image" => $image,

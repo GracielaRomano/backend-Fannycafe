@@ -14,6 +14,7 @@ class Event {
     public $description;
     public $full_description;
     public $event_date;
+    public $event_yyyymm;
     public $location;
     public $attendees;
     public $image;
@@ -31,12 +32,12 @@ class Event {
      */
     function getAllEvents() {
         $query = "SELECT 
-                    id, title, subtitle, description, event_date, 
+                    id, title, subtitle, description, event_date, event_yyyymm,
                     location, attendees, image, banner_image, 
                     is_active, created_at, updated_at
                   FROM " . $this->table_name . " 
                   WHERE is_active = 1 
-                  ORDER BY created_at DESC";
+                  ORDER BY event_yyyymm DESC, created_at DESC";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -50,7 +51,7 @@ class Event {
     function getEventById($id) {
         $query = "SELECT 
                     id, title, subtitle, description, full_description, 
-                    event_date, location, attendees, image, banner_image, 
+                    event_date, event_yyyymm, location, attendees, image, banner_image, 
                     is_active, created_at, updated_at
                   FROM " . $this->table_name . " 
                   WHERE id = ? AND is_active = 1 
@@ -68,6 +69,7 @@ class Event {
             $this->description = $row['description'];
             $this->full_description = $row['full_description'];
             $this->event_date = $row['event_date'];
+            $this->event_yyyymm = $row['event_yyyymm'];
             $this->location = $row['location'];
             $this->attendees = $row['attendees'];
             $this->image = $row['image'];

@@ -51,6 +51,7 @@ if($event->getEventById($id)) {
         "description" => $event->description,
         "full_description" => $event->full_description,
         "event_date" => $event->event_date,
+        "event_yyyymm" => $event->event_yyyymm,
         "location" => $event->location,
         "attendees" => $event->attendees,
         "image" => $event->image,
