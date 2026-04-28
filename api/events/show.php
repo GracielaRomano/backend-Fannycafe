@@ -27,10 +27,21 @@ if($event->getEventById($id)) {
 
     // Obtener galería
     $gallery_stmt = $event->getEventGallery($event->id);
-    $gallery = array();
-    while ($img = $gallery_stmt->fetch(PDO::FETCH_ASSOC)) {
-        $gallery[] = $img['image_url'];
-    }
+$gallery = array();
+
+while ($media = $gallery_stmt->fetch(PDO::FETCH_ASSOC)) {
+    $gallery[] = array(
+        "type" => $media['media_type'],               // image | video
+        "url" => $media['media_url'],
+        "thumbnail" => $media['thumbnail_url'],       // puede ser null
+        "display_order" => (int)$media['display_order']
+    );
+}
+    // $gallery_stmt = $event->getEventGallery($event->id);
+    // $gallery = array();
+    // while ($img = $gallery_stmt->fetch(PDO::FETCH_ASSOC)) {
+    //     $gallery[] = $img['image_url'];
+    // }
 
     // Obtener testimonio
     $testimonial_stmt = $event->getEventTestimonial($event->id);

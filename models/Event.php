@@ -102,17 +102,29 @@ class Event {
      * Obtener galería de un evento
      */
     function getEventGallery($event_id) {
-        $query = "SELECT image_url, display_order 
-                  FROM event_gallery 
-                  WHERE event_id = ? 
+        $query = "SELECT media_type, media_url, thumbnail_url, display_order
+                  FROM event_gallery
+                  WHERE event_id = ?
                   ORDER BY display_order ASC";
-
+    
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $event_id);
         $stmt->execute();
-
+    
         return $stmt;
     }
+    // function getEventGallery($event_id) {
+    //     $query = "SELECT image_url, display_order 
+    //               FROM event_gallery 
+    //               WHERE event_id = ? 
+    //               ORDER BY display_order ASC";
+
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(1, $event_id);
+    //     $stmt->execute();
+
+    //     return $stmt;
+    // }
 
     /**
      * Obtener testimonio de un evento
